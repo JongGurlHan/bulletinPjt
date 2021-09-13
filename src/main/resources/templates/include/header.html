@@ -1,0 +1,47 @@
+<!-- 상단 메뉴 부분 -->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<header>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top shadow-lg">
+    <a class="navbar-brand" href="/main" th:href="@{/main}">SoftCampus</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav">
+<!--            <tr th:each="obj,  ${}">-->
+
+            </tr>
+            <li class="nav-item">
+                <a href="/board/main" th:href="@{/board/main}" class="nav-link">자유게시판</a>
+            </li>
+            <li class="nav-item">
+                <a href="/board/main" th:href="@{/board/main}"class="nav-link">유머게시판</a>
+            </li>
+            <li class="nav-item">
+                <a href="/board/main" th:href="@{/board/main}" class="nav-link">정치게시판</a>
+            </li>
+            <li class="nav-item">
+                <a href="/board/main" th:href="@{/board/main}"class="nav-link">스포츠게시판</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="/user/login" th:href="@{/user/login}"class="nav-link">로그인</a>
+            </li>
+            <li class="nav-item">
+                <a href="/user/join" th:href="@{/user/join}"class="nav-link">회원가입</a>
+            </li>
+            <li class="nav-item">
+                <a href="/user/modify" th:href="@{/user/modify}" class="nav-link">정보수정</a>
+            </li>
+            <li class="nav-item">
+                <a href="/user/logout" th:href="@{/user/logout}" class="nav-link">로그아웃</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</header>
+</html>
