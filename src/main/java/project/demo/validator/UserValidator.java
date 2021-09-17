@@ -1,10 +1,8 @@
-package project.validator;
+package project.demo.validator;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import project.demo.beans.UserBean;
-
-import java.lang.annotation.Target;
 
 public class UserValidator implements Validator {
 
