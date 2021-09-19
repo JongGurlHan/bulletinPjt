@@ -52,11 +52,15 @@ public class UserController {
 		return "user/logout";
 	}
 
+
+	//validator(비번확인) 등록
 	@InitBinder
 	public void initBinder(WebDataBinder binder){
 		UserValidator validator1 = new UserValidator();
 		binder.addValidators(validator1);
 	}
+
+
 }
 
 
