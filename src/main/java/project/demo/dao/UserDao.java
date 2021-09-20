@@ -2,6 +2,7 @@ package project.demo.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import project.demo.beans.UserBean;
 import project.demo.mapper.UserMapper;
 
 @Repository
@@ -13,4 +14,9 @@ public class UserDao {
     public String checkUserIdExist(String user_id){
         return userMapper.checkUserIdExist(user_id);
     }
+
+    public void addUserInfo(UserBean userBean){
+        userMapper.addUserInfo(userBean);
+    }
+
 }

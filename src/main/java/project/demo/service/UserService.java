@@ -2,6 +2,7 @@ package project.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import project.demo.beans.UserBean;
 import project.demo.dao.UserDao;
 
 @Service
@@ -19,5 +20,10 @@ public class UserService {
             return false;
         }
     }
+
+    public void addUserInfo(UserBean userBean){
+        userDao.addUserInfo(userBean);
+    }
+
 
 }

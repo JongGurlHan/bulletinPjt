@@ -1,6 +1,7 @@
 package project.demo.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.demo.beans.UserBean;
+import project.demo.service.UserService;
 import project.demo.validator.UserValidator;
 
 import javax.validation.Valid;
@@ -19,6 +21,9 @@ import java.util.Map;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
+	@Autowired
+	private UserService userService;
 
 	@GetMapping("/login")
 	public String login() {
@@ -38,6 +43,8 @@ public class UserController {
 		if(result.hasErrors()){
 			return "user/join";
 		}
+
+		userService.addUserInfo(userBean);
 		return "user/join_success";
 
 	}

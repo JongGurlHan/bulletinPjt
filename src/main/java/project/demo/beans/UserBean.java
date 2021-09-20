@@ -1,14 +1,14 @@
 package project.demo.beans;
 
 //import lombok.Data;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-@Getter
-@Setter
+@Data
 public class UserBean {
 
     private int user_idx;
@@ -29,4 +29,10 @@ public class UserBean {
     @Pattern(regexp = "[a-zA-Z0-9]*")
     private String user_pw2;
 
+    private boolean userIdExist;
+
+    //처음 Bean이만들어졌을땐 중복검사 안한거니까 false세팅
+    public UserBean() {
+        this.userIdExist = false;
+    }
 }
