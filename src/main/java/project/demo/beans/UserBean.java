@@ -1,9 +1,6 @@
 package project.demo.beans;
 
-//import lombok.Data;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -30,9 +27,11 @@ public class UserBean {
     private String user_pw2;
 
     private boolean userIdExist;
+    private boolean userLogin;
 
     //처음 Bean이만들어졌을땐 중복검사 안한거니까 false세팅
     public UserBean() {
         this.userIdExist = false;
+        this.userLogin = false;
     }
 }

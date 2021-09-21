@@ -5,11 +5,16 @@ import org.springframework.stereotype.Service;
 import project.demo.beans.UserBean;
 import project.demo.dao.UserDao;
 
+import javax.annotation.Resource;
+
 @Service
 public class UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Resource(name = "loginUserBean")
+    private UserBean loginUserBean;
 
     public boolean checkUserIdExist(String user_id){
         String user_name = userDao.checkUserIdExist(user_id);
@@ -23,6 +28,18 @@ public class UserService {
 
     public void addUserInfo(UserBean userBean){
         userDao.addUserInfo(userBean);
+    }
+
+    public void getLoginUserInfo(UserBean tempLoginUserBean){
+
+        UserBean tempLoginUserBean2 = userDao.getLoginUserInfo(tempLoginUserBean);
+
+        //회원정보가 있다면 loginUserBean에 회원정보를 넣어준다.
+        if(tempLoginUserBean2 != null){
+            loginUserBean.setUser_idx(tempLoginUserBean2.getUser_idx());
+            loginUserBean.setUser_name(tempLoginUserBean2.getUser_name());
+            loginUserBean.setUserLogin(true);
+        }
     }
 
 

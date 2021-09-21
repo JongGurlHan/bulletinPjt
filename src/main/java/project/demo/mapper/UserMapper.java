@@ -13,4 +13,10 @@ public interface UserMapper {
 
     @Insert("INSERT INTO user_table(user_name, user_id, user_pw) VALUES (#{user_name}, #{user_id}, #{user_pw})")
     void addUserInfo(UserBean userBean);
+
+    @Select("SELECT user_idx, user_name\n" +
+            "FROM user_table\n" +
+            "WHERE user_id= #{user_id} and user_pw=#{user_pw};\n")
+    UserBean getLoginUserInfo(UserBean tempLoginUserBean );
+
 }

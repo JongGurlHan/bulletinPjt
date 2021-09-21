@@ -13,6 +13,7 @@ import project.demo.beans.UserBean;
 import project.demo.service.UserService;
 import project.demo.validator.UserValidator;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,10 +26,39 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Resource(name = "loginUserBean")
+	private UserBean loginUserBean;
+
 	@GetMapping("/login")
-	public String login() {
+	public String login(@ModelAttribute("tempLoginUserBean")UserBean tempLoginUserBean,
+						@RequestParam(value = "fail", defaultValue = "false") boolean fail,
+						Model model){
+
+		//fail이란 이름의 파라미터에 true가 들어간다면 로그인 실패
+		// fail이 들어간다면 로그인 성공
+
+		model.addAttribute("fail", fail);
+
 		return "user/login";
 	}
+
+	@PostMapping("/login")
+	public String login(@Valid @ModelAttribute("tempLoginUserBean")UserBean tempLoginUserBean, BindingResult result){
+		if(result.hasErrors()){
+			return "user/login";
+		}
+
+		userService.getLoginUserInfo(tempLoginUserBean);
+
+		if(loginUserBean.isUserLogin() == true){
+			return "user/login_success";
+		}else{
+			return "user/login_fail";
+		}
+
+	}
+
+
 	
 	@GetMapping("/join")
 	public String join(@ModelAttribute("user") UserBean userBean) {
@@ -43,7 +73,6 @@ public class UserController {
 		if(result.hasErrors()){
 			return "user/join";
 		}
-
 		userService.addUserInfo(userBean);
 		return "user/join_success";
 
