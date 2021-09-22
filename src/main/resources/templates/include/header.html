@@ -9,38 +9,30 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav">
-<!--            <tr th:each="obj,  ${topMenuList}">&ndash;&gt;-->
 
-            </tr>
+        <ul class="navbar-nav" th:each="menu :${topMenuList}">
             <li class="nav-item">
-                <a href="/board/main" th:href="@{/board/main}" class="nav-link">자유게시판</a>
-            </li>
-            <li class="nav-item">
-                <a href="/board/main" th:href="@{/board/main}"class="nav-link">유머게시판</a>
-            </li>
-            <li class="nav-item">
-                <a href="/board/main" th:href="@{/board/main}" class="nav-link">정치게시판</a>
-            </li>
-            <li class="nav-item">
-                <a href="/board/main" th:href="@{/board/main}"class="nav-link">스포츠게시판</a>
+                <a href="/board/main" th:href="@{/board/main(board_info_idx=${menu.board_info_idx})}" class="nav-link" th:text="${menu.board_info_name}">자유게시판</a>
             </li>
         </ul>
 
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a href="/user/login" th:href="@{/user/login}"class="nav-link">로그인</a>
-            </li>
-            <li class="nav-item">
-                <a href="/user/join" th:href="@{/user/join}"class="nav-link">회원가입</a>
-            </li>
-            <li class="nav-item">
+
+        <ul class="navbar-nav ml-auto" >
+            <li class="nav-item" th:if="${loginUserBean.userLogin}">
                 <a href="/user/modify" th:href="@{/user/modify}" class="nav-link">정보수정</a>
             </li>
-            <li class="nav-item">
-                <a href="/user/logout" th:href="@{/user/logout}" class="nav-link">로그아웃</a>
+            <li class="nav-item" th:if="${loginUserBean.userLogin}">
+                 <a href="/user/logout" th:href="@{/user/logout}" class="nav-link">로그아웃</a>
+            </li>
+
+            <li class="nav-item" th:unless="${loginUserBean.userLogin}">
+                <a href="/user/login"  th:href="@{/user/login}" class="nav-link">로그인</a>
+            </li>
+            <li class="nav-item" th:unless="${loginUserBean.userLogin}">
+                <a href="/user/join" th:href="@{/user/join}" class="nav-link">회원가입</a>
             </li>
         </ul>
+
     </div>
 </nav>
 </header>

@@ -29,6 +29,10 @@ public class UserBean {
     private boolean userIdExist;
     private boolean userLogin;
 
+    public void setUserLogin(boolean userLogin) {
+        this.userLogin = userLogin;
+    }
+
     //처음 Bean이만들어졌을땐 중복검사 안한거니까 false세팅
     public UserBean() {
         this.userIdExist = false;

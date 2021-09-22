@@ -13,3 +13,4 @@ public interface TopMenuMapper {
     List<BoardInfoBean> getTopMenuList();
 
 }
+
