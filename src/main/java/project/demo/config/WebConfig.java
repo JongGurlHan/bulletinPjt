@@ -40,7 +40,7 @@ public class WebConfig implements WebMvcConfigurer {
         reg2.excludePathPatterns("/board/main");
     }
 
-    @Bean("loginUserBean")`
+    @Bean("loginUserBean")
     //세션스코프: 브라우저가 최초의 요청 시키는 시점, 최초 요청발생할때 주입
     @SessionScope
     public UserBean loginUserBean(){
