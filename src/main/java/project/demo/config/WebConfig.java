@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import project.demo.beans.UserBean;
+import project.demo.interceptor.CheckLoginInterceptor;
 import project.demo.interceptor.TopMenuInterceptor;
 import project.demo.service.TopMenuService;
 
@@ -24,14 +25,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Resource(name="loginUserBean")
     private UserBean loginUserBean;
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new TopMenuInterceptor())
-//                .order(1)
-//                .addPathPatterns("/**");
-//    }
-
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         WebMvcConfigurer.super.addInterceptors(registry);
@@ -40,9 +33,14 @@ public class WebConfig implements WebMvcConfigurer {
 
         InterceptorRegistration reg1 = registry.addInterceptor(topMenuInterceptor);
         reg1.addPathPatterns("/**");
+
+        CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginUserBean);
+        InterceptorRegistration reg2 =  registry.addInterceptor(checkLoginInterceptor);
+        reg2.addPathPatterns("/user/modify", "/user/logout", "/board/*");
+        reg2.excludePathPatterns("/board/main");
     }
 
-    @Bean("loginUserBean")
+    @Bean("loginUserBean")`
     //세션스코프: 브라우저가 최초의 요청 시키는 시점, 최초 요청발생할때 주입
     @SessionScope
     public UserBean loginUserBean(){

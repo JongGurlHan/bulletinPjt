@@ -4,19 +4,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.demo.beans.UserBean;
 import project.demo.service.UserService;
 import project.demo.validator.UserValidator;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @Controller
@@ -89,6 +85,11 @@ public class UserController {
 		loginUserBean.setUserLogin(false);
 
 		return "user/logout";
+	}
+
+	@GetMapping("/not_login")
+	public String not_login(){
+		return "user/not_login";
 	}
 
 
