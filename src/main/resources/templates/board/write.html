@@ -8,6 +8,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/error.css}">
+
 </head>
 <body>
 
@@ -19,18 +21,22 @@
         <div class="col-sm-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <form action="/board/read" th:action="@{/board/read}" method="get">
+                    <form action="/board/read" th:action th:object="${writeContentBean}" method="post">
                         <div class="form-group">
-                            <label for="board_subject">제목</label>
-                            <input type="text" id="board_subject" name="board_subject" class="form-control"/>
+                            <label for="content_subject">제목</label>
+                            <input type="text" id="content_subject" th:field="*{content_subject}" class="form-control"/>
+                            <div class="field-error" th:errors="*{content_subject}"></div>
+
                         </div>
                         <div class="form-group">
-                            <label for="board_content">내용</label>
-                            <textarea id="board_content" name="board_content" class="form-control" rows="10" style="resize:none"></textarea>
+                            <label for="content_text">내용</label>
+                            <textarea id="content_text"  th:field="*{content_text}" class="form-control" rows="10" style="resize:none"></textarea>
+                            <div class="field-error" th:errors="*{content_text}"></div>
                         </div>
+
                         <div class="form-group">
-                            <label for="board_file">첨부 이미지</label>
-                            <input type="file" id="board_file" name="board_file" class="form-control" accept="image/*"/>
+                            <label for="content_file">첨부 이미지</label>
+                            <input type="file" id="content_file" th:field="*{content_file}" class="form-control" accept="image/*"/>
                         </div>
                         <div class="form-group">
                             <div class="text-right">
