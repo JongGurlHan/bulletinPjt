@@ -21,7 +21,7 @@
         <div class="col-sm-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <form action="/board/read" th:action th:object="${writeContentBean}" method="post">
+                    <form action="/board/read" th:action th:object="${writeContentBean}" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="content_subject">제목</label>
                             <input type="text" id="content_subject" th:field="*{content_subject}" class="form-control"/>
