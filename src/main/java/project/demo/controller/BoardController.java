@@ -1,16 +1,21 @@
 package project.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import project.demo.beans.ContentBean;
+import project.demo.service.BoardService;
 
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
+
+	@Autowired
+	private BoardService boardService;
 	
 	@GetMapping("/main")
 	public String main(@RequestParam("board_info_idx") int board_info_idx,
@@ -26,7 +31,13 @@ public class BoardController {
 	}
 
 	@GetMapping("/write")
-	public String write(@ModelAttribute("writeContentBean")ContentBean writeContentBean){
+	public String write(@ModelAttribute("writeContentBean")ContentBean writeContentBean,
+						@RequestParam("board_info_idx") int board_info_idx ){
+		//어느 게시판에서 쓰는지 board_info_idx를 가져온다.
+
+		writeContentBean.setContent_board_idx(board_info_idx);
+		System.out.println(writeContentBean.getContent_board_idx());
+
 		return "board/write";
 	}
 
@@ -35,6 +46,9 @@ public class BoardController {
 		if(result.hasErrors()){
 			return "board/write";
 		}
+		boardService.addContentInfo(writeContentBean);
+		System.out.println(writeContentBean.getContent_board_idx());
+
 		return "board/write_success";
 
 	}
