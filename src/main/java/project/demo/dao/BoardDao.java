@@ -16,4 +16,9 @@ public class BoardDao {
         boardMapper.addContentInfo(writeContentBean);
     }
 
+    public String getBoardInfoName(int board_info_idx){
+        return boardMapper.getBoardInfoName(board_info_idx);
+    }
+
+
 }

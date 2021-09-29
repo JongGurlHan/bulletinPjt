@@ -51,4 +51,9 @@ public class BoardService {
 
         boardDao.addContentInfo(writeContentBean);
     }
+
+    //게시판 이름 가져오기
+    public String getBoardInfoName(int board_info_idx){
+        return boardDao.getBoardInfoName(board_info_idx);
+    }
 }

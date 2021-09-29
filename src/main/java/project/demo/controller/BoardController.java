@@ -22,6 +22,10 @@ public class BoardController {
 					   Model model) {
 		model.addAttribute("board_info_idx", board_info_idx);
 
+		//게시판 이름 가져오기
+		String boardInfoName = boardService.getBoardInfoName(board_info_idx);
+		model.addAttribute("boardInfoName", boardInfoName);
+
 		return "board/main";
 	}
 
