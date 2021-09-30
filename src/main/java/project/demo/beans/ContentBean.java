@@ -31,4 +31,6 @@ public class ContentBean {
     private int content_board_idx;
 
     private String content_date;
+
+    private String content_writer_name; //글작성한 사람
 }

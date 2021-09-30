@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import project.demo.beans.ContentBean;
 import project.demo.mapper.BoardMapper;
 
+import java.util.List;
+
 
 @Repository
 public class BoardDao {
@@ -20,5 +22,7 @@ public class BoardDao {
         return boardMapper.getBoardInfoName(board_info_idx);
     }
 
-
+    public List<ContentBean> getContentList(int board_info_idx){
+        return boardMapper.getContentList(board_info_idx);
+    }
 }

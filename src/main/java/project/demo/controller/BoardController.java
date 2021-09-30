@@ -9,6 +9,7 @@ import project.demo.beans.ContentBean;
 import project.demo.service.BoardService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/board")
@@ -25,6 +26,10 @@ public class BoardController {
 		//게시판 이름 가져오기
 		String boardInfoName = boardService.getBoardInfoName(board_info_idx);
 		model.addAttribute("boardInfoName", boardInfoName);
+
+		//게시글 정보 가져오기
+		List<ContentBean> contentList = boardService.getContentList(board_info_idx);
+		model.addAttribute("contentList", contentList);
 
 		return "board/main";
 	}

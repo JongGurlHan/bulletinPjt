@@ -11,6 +11,7 @@ import project.demo.dao.BoardDao;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.util.List;
 
 @Service
 @PropertySource("option.properties")
@@ -56,4 +57,9 @@ public class BoardService {
     public String getBoardInfoName(int board_info_idx){
         return boardDao.getBoardInfoName(board_info_idx);
     }
+
+    public List<ContentBean> getContentList(int board_info_idx){
+        return boardDao.getContentList(board_info_idx);
+    }
+
 }
