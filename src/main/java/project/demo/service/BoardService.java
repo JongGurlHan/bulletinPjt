@@ -58,8 +58,14 @@ public class BoardService {
         return boardDao.getBoardInfoName(board_info_idx);
     }
 
+    //게시글 리스트 가져오기
     public List<ContentBean> getContentList(int board_info_idx){
         return boardDao.getContentList(board_info_idx);
+    }
+
+    //게시글 정보 가져오기
+    public ContentBean getContentInfo(int content_idx){
+        return boardDao.getContentInfo(content_idx);
     }
 
 }

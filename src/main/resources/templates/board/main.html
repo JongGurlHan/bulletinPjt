@@ -32,14 +32,13 @@
 
                 <tbody>
 
-                <tr th:each="obj : ${contentList} ">
-                    <tr>
-                        <td class="text-center d-none d-md-table-cell" th:value="${obj.content_idx}">10</td>
-                        <td><a href='board_read.html' th:href="@{/board/read}" th:value="${obj.content_subject}">글 제목 입니다</a></td>
-                        <td class="text-center d-none d-md-table-cell" th:value="${obj.content_writer_name}">홍길동</td>
-                        <td class="text-center d-none d-md-table-cell" th:value="${obj.content_date}" >2018-12-12</td>
+                    <tr th:each="obj : ${contentList} ">
+                        <td class="text-center d-none d-md-table-cell" th:text="${obj.content_idx}">10</td>
+                        <td><a href='board_read.html' th:href="@{/board/read(board_info_idx=${board_info_idx}, content_idx=${obj.content_idx}) }" th:text="${obj.content_subject}">글 제목 입니다</a></td>
+                        <td class="text-center d-none d-md-table-cell" th:text="${obj.content_writer_name}">홍길동</td>
+                        <td class="text-center d-none d-md-table-cell" th:text="${obj.content_date}" >2018-12-12</td>
                     </tr>
-                </tr>
+
 
                 </tbody>
             </table>

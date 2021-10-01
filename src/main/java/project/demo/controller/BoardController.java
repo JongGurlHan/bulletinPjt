@@ -35,16 +35,27 @@ public class BoardController {
 	}
 
 	@GetMapping("/read")
-	public String read(){
+	public String read(@RequestParam("board_info_idx")int board_info_idx,
+					   @RequestParam("content_idx") int content_idx,
+					   Model model){
+
+		model.addAttribute("board_info_idx", board_info_idx);
+
+		ContentBean readContentBean = boardService.getContentInfo(content_idx);
+
 		return "board/read";
 	}
 
 	@GetMapping("/write")
 	public String write(@ModelAttribute("writeContentBean")ContentBean writeContentBean,
-						@RequestParam("board_info_idx") int board_info_idx ){
+						@RequestParam("board_info_idx") int board_info_idx,
+						Model model){
 		//어느 게시판에서 쓰는지 board_info_idx를 가져온다.
 
 		writeContentBean.setContent_board_idx(board_info_idx);
+
+		model.addAttribute("writeContentBean", writeContentBean);
+
 		System.out.println(writeContentBean.getContent_board_idx());
 
 		return "board/write";
