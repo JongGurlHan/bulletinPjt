@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import project.demo.beans.ContentBean;
+import project.demo.beans.UserBean;
 import project.demo.service.BoardService;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -17,6 +19,9 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+
+	@Resource(name = "loginUserBean")
+	private UserBean loginUserBean;
 	
 	@GetMapping("/main")
 	public String main(@RequestParam("board_info_idx") int board_info_idx,
@@ -40,8 +45,13 @@ public class BoardController {
 					   Model model){
 
 		model.addAttribute("board_info_idx", board_info_idx);
+		//수정하기나 삭제하기 눌렀을때 어떤 글을 수정하고 삭제할지 알아내기 위해
+		model.addAttribute("content_idx", content_idx);
 
 		ContentBean readContentBean = boardService.getContentInfo(content_idx);
+		model.addAttribute("readContentBean", readContentBean);
+
+		model.addAttribute("loginUserBean", loginUserBean);
 
 		return "board/read";
 	}
@@ -81,5 +91,10 @@ public class BoardController {
 	@GetMapping("/delete")
 	public String delete(){
 		return "board/delete";
+	}
+
+	@GetMapping("/not_writer")
+	public String not_writer(){
+		return "board/not_writer";
 	}
 }

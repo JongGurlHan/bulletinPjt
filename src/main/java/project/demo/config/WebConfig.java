@@ -12,7 +12,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import project.demo.beans.UserBean;
 import project.demo.interceptor.CheckLoginInterceptor;
+import project.demo.interceptor.CheckWriterInterceptor;
 import project.demo.interceptor.TopMenuInterceptor;
+import project.demo.service.BoardService;
 import project.demo.service.TopMenuService;
 
 import javax.annotation.Resource;
@@ -27,6 +29,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Resource(name="loginUserBean")
     private UserBean loginUserBean;
 
+    @Autowired
+    private BoardService boardService;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         WebMvcConfigurer.super.addInterceptors(registry);
@@ -40,6 +45,11 @@ public class WebConfig implements WebMvcConfigurer {
         InterceptorRegistration reg2 =  registry.addInterceptor(checkLoginInterceptor);
         reg2.addPathPatterns("/user/modify", "/user/logout", "/board/*");
         reg2.excludePathPatterns("/board/main");
+
+        //글 작성자만 게시글 수정, 삭제하게하는 인터셉터
+        CheckWriterInterceptor checkWriterInterceptor = new CheckWriterInterceptor(loginUserBean, boardService  );
+        InterceptorRegistration reg3 = registry.addInterceptor(checkWriterInterceptor);
+        reg3.addPathPatterns("/board/modify", "/board/delete");
     }
 
     @Bean("loginUserBean")

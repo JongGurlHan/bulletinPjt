@@ -25,12 +25,14 @@ public interface BoardMapper {
             "ORDER BY a1.content_idx DESC")
     List<ContentBean> getContentList(int board_info_idx);
 
+    //게시글 정보 1개 가져오기+(로그인한 사람과 작성자 인덱스 번호 비교)
     @Select("SELECT a2.user_name as content_writer_name, DATE_FORMAT(a1.content_date,'%Y-%M-%d') AS content_date,\n" +
-            "a1.content_subject, a1.content_text, a1.content_file\n" +
+            "a1.content_subject, a1.content_text, a1.content_file, a1.content_writer_idx\n" +
             "FROM content_table a1, user_table a2\n" +
             "WHERE a1.content_writer_idx = a2.user_idx\n" +
             "AND content_idx= #{content_idx}\n")
     ContentBean getContentInfo(int content_idx);
+
 
 
 
