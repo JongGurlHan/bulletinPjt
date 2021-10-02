@@ -19,27 +19,38 @@
         <div class="col-sm-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <form action="${root }board/read" th:action="@{/board/read}" method="get">
+                    <form action="${root }board/read" th:action th:object="${modifyContentBean}" method="post" enctype="multipart/form-data">
+
+<!--                        어떤 글을 수정할지 알아야 하기 때문에 -->
+                        <input type="hidden" th:field="*{content_idx}">
+<!--                        수정하고 돌아올때 게시판 인덱스 번호도 알아야 하기 때문에-->
+                        <input type="hidden" th:field="*{content_board_idx}">
+
+
                         <div class="form-group">
                             <label for="board_writer_name">작성자</label>
-                            <input type="text" id="board_writer_name" name="board_writer_name" class="form-control" value="홍길동" disabled="disabled"/>
+                            <input type="text" id="board_writer_name" th:field="*{board_writer_name}" class="form-control" value="홍길동" readonly="true"/>
                         </div>
                         <div class="form-group">
-                            <label for="board_date">작성날짜</label>
-                            <input type="text" id="board_date" name="board_date" class="form-control" value="2018-7-20" disabled="disabled"/>
+                            <label for="content_date">작성날짜</label>
+                            <input type="text" id="content_date" th:field="*{content_date}" class="form-control" value="2018-7-20" readonly="true"/>
                         </div>
                         <div class="form-group">
-                            <label for="board_subject">제목</label>
-                            <input type="text" id="board_subject" name="board_subject" class="form-control" value="제목입니다"/>
+                            <label for="content_subject">제목</label>
+                            <input type="text" id="content_subject" th:field="*{content_subject}" class="form-control" value="제목입니다"/>
+                            <div class="field-error" th:errors="*{content_subject}"></div>
+
                         </div>
                         <div class="form-group">
-                            <label for="board_content">내용</label>
-                            <textarea id="board_content" name="board_content" class="form-control" rows="10" style="resize:none">본문입니다</textarea>
+                            <label for="content_test">내용</label>
+                            <textarea id="content_test" th:field="*{content_test}" class="form-control" rows="10" style="resize:none">본문입니다</textarea>
+                            <div class="field-error" th:errors="*{content_test}"></div>
+
                         </div>
                         <div class="form-group">
                             <label for="board_file">첨부 이미지</label>
                             <img src="${root }image/logo.png" width="100%"/>
-                            <input type="file" name="board_file" id="board_file" class="form-control" accept="image/*"/>
+                            <input type="file"  id="board_file" class="form-control" accept="image/*"/>
                         </div>
                         <div class="form-group">
                             <div class="text-right">

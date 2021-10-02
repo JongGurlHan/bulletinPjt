@@ -84,7 +84,9 @@ public class BoardController {
 	}
 
 	@GetMapping("/modify")
-	public String modify(){
+	public String modify(@RequestParam("board_info_idx") int board_info_idx,
+						 @RequestParam("content_idx") int content_idx,
+						 Model model){
 		return "board/modify";
 	}
 
