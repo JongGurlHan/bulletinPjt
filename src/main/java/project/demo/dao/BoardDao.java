@@ -30,4 +30,9 @@ public class BoardDao {
         return boardMapper.getContentInfo(content_idx);
     }
 
+    public void modifyContentInfo(ContentBean modifyContentInfo){
+        boardMapper.modifyContentInfo(modifyContentInfo);
+    }
+
+
 }

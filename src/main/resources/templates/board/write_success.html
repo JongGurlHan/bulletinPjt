@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script th:inline="javascript">
-;
-        alert('저장되었습니다.');
+    <script >
+
+        var board_info_idx = "[[${writeContentBean.content_board_idx}]]";
+        var content_idx = "[[${writeContentBean.content_idx}]]";
+
+        alert('저장됐습니다.');
+        location.href = '/board/main?board_info_idx='+board_info_idx
+
+
     </script>
 </head>
-<body>
 
-</body>
 </html>

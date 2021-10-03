@@ -68,4 +68,18 @@ public class BoardService {
         return boardDao.getContentInfo(content_idx);
     }
 
+    //게시글 수정하기
+    public void modifyContentInfo(ContentBean modifyContentBean){
+
+        MultipartFile upload_file = modifyContentBean.getUpload_file();
+
+        //기존에 업로드한 파일이 있다면
+        if(upload_file.getSize() > 0){
+            String file_name = saveUploadFile(upload_file);
+            modifyContentBean.setContent_file(file_name);
+        }
+        //기존에 업로드한 파일이 없다면
+        boardDao.modifyContentInfo(modifyContentBean);
+    }
+
 }

@@ -8,6 +8,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/error.css}">
+
 </head>
 <body>
 
@@ -28,8 +30,8 @@
 
 
                         <div class="form-group">
-                            <label for="board_writer_name">작성자</label>
-                            <input type="text" id="board_writer_name" th:field="*{board_writer_name}" class="form-control" value="홍길동" readonly="true"/>
+                            <label for="content_writer_name">작성자</label>
+                            <input type="text" id="content_writer_name" th:field="*{content_writer_name}" class="form-control" value="홍길동" readonly="true"/>
                         </div>
                         <div class="form-group">
                             <label for="content_date">작성날짜</label>
@@ -42,20 +44,26 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="content_test">내용</label>
-                            <textarea id="content_test" th:field="*{content_test}" class="form-control" rows="10" style="resize:none">본문입니다</textarea>
-                            <div class="field-error" th:errors="*{content_test}"></div>
+                            <label for="content_text">내용</label>
+                            <textarea id="content_text" th:field="*{content_text}" class="form-control" rows="10" style="resize:none">본문입니다</textarea>
+                            <div class="field-error" th:errors="*{content_text}"></div>
 
                         </div>
+
                         <div class="form-group">
-                            <label for="board_file">첨부 이미지</label>
-                            <img src="${root }image/logo.png" width="100%"/>
-                            <input type="file"  id="board_file" class="form-control" accept="image/*"/>
+                            <label for="upload_file">첨부 이미지</label>
+                            <div class="form-group" th:if="${modifyContentBean.content_file != null}">
+                                <img src="${root }image/logo.png"  th:src="@{'/upload/'+${modifyContentBean.content_file} }" width="100%"/>
+                                <input type="hidden" th:field="*{content_file}">
+                            </div>
+                            <input type="file" id="upload_file" th:field="*{upload_file}" class="form-control" accept="image/*"/>
                         </div>
+
+
                         <div class="form-group">
                             <div class="text-right">
                                 <button type="submit" class="btn btn-primary">수정완료</button>
-                                <a href="${root }board/read" th:href="@{/board/read}" class="btn btn-info">취소</a>
+                                <a href="${root }board/read" th:href="@{/board/read(board_info_idx=${board_info_idx}, content_idx=${content_idx})}" class="btn btn-info">취소</a>
                             </div>
                         </div>
                     </form>

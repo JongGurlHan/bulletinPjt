@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var board_info_idx = "[[${modifyContentBean.content_board_idx}]]";
+        var content_idx = "[[${modifyContentBean.content_idx}]]";
+        alert('수정되었습니다.');
+        location.href = '/board/read?board_info_idx='+board_info_idx+'&content_idx='+content_idx
+
+    </script>
+</head>
+
+</html>

@@ -3,6 +3,7 @@ package project.demo.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import project.demo.beans.ContentBean;
 
 import java.util.List;
@@ -33,10 +34,18 @@ public interface BoardMapper {
             "AND content_idx= #{content_idx}\n")
     ContentBean getContentInfo(int content_idx);
 
+    //글정보 업데이트 쿼리
+    @Update("update content_table " +
+            "set content_subject = #{content_subject}, content_text = #{content_text}, " +
+            "content_file = #{content_file, jdbcType=VARCHAR} " +
+            "where content_idx = #{content_idx}")
+    void modifyContentInfo(ContentBean modifyContentBean);
+
+    }
 
 
 
-}
+
 
 
 
