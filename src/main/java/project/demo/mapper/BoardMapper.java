@@ -1,9 +1,6 @@
 package project.demo.mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import project.demo.beans.ContentBean;
 
 import java.util.List;
@@ -41,10 +38,14 @@ public interface BoardMapper {
             "where content_idx = #{content_idx}")
     void modifyContentInfo(ContentBean modifyContentBean);
 
-    }
+
+    //글삭제
+    @Delete("DELETE FROM content_table " +
+            "WHERE content_idx =#{content_idx}")
+    void deleteContentInfo(int content_idx);
 
 
-
+}
 
 
 

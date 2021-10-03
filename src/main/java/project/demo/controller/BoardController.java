@@ -124,7 +124,15 @@ public class BoardController {
 
 
 	@GetMapping("/delete")
-	public String delete(){
+	public String delete(@RequestParam("board_info_idx") int board_info_idx,
+						 @RequestParam("content_idx") int content_idx,
+						 Model model){
+
+		boardService.deleteContentInfo(content_idx);
+
+		//삭제 메시지를 보여주기 위해
+		model.addAttribute("board_info_idx", board_info_idx);
+
 		return "board/delete";
 	}
 
