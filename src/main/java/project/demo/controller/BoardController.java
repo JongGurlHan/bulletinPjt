@@ -26,6 +26,7 @@ public class BoardController {
 	
 	@GetMapping("/main")
 	public String main(@RequestParam("board_info_idx") int board_info_idx,
+					   @RequestParam(value = "page", defaultValue = "1") int page,
 					   Model model) {
 		model.addAttribute("board_info_idx", board_info_idx);
 
@@ -34,7 +35,7 @@ public class BoardController {
 		model.addAttribute("boardInfoName", boardInfoName);
 
 		//게시글 정보 가져오기
-		List<ContentBean> contentList = boardService.getContentList(board_info_idx);
+		List<ContentBean> contentList = boardService.getContentList(board_info_idx, page);
 		model.addAttribute("contentList", contentList);
 
 		return "board/main";

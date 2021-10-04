@@ -1,5 +1,6 @@
 package project.demo.service;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -19,6 +20,9 @@ public class BoardService {
 
     @Value("${path.upload}")
     private String path_upload;
+
+    @Value("${page.listcnt}")
+    private int page_listcnt;
 
     @Autowired
     private BoardDao boardDao;
@@ -59,8 +63,16 @@ public class BoardService {
     }
 
     //게시글 리스트 가져오기
-    public List<ContentBean> getContentList(int board_info_idx){
-        return boardDao.getContentList(board_info_idx);
+    public List<ContentBean> getContentList(int board_info_idx, int page){
+
+        //rowBounds는 인덱스 번호가 0 부터 시작된다. (0,10) ->처음부터 10개 (10,10) ->11번째부터 10개
+        int start = (page - 1) * page_listcnt;
+        //만약 페이지에 1이 들어오면 start는 0(1번째) -> 1에서부터 10개
+        //페이지에 2가 들어가면 start는 10(11번째) -> 11에서부터 10개
+        RowBounds rowBounds = new RowBounds(start, page_listcnt);
+
+
+        return boardDao.getContentList(board_info_idx, rowBounds);
     }
 
     //게시글 정보 가져오기
@@ -82,7 +94,7 @@ public class BoardService {
         boardDao.modifyContentInfo(modifyContentBean);
     }
 
-    //게시글 수정하기
+    //게시글 삭제하기
     public void deleteContentInfo(int content_idx){
         boardDao.deleteContentInfo(content_idx);
     }

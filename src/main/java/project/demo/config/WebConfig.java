@@ -37,7 +37,6 @@ public class WebConfig implements WebMvcConfigurer {
         WebMvcConfigurer.super.addInterceptors(registry);
 
         TopMenuInterceptor topMenuInterceptor = new TopMenuInterceptor(topMenuService, loginUserBean);
-
         InterceptorRegistration reg1 = registry.addInterceptor(topMenuInterceptor);
         reg1.addPathPatterns("/**");
 
