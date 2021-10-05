@@ -7,6 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import project.demo.beans.ContentBean;
+import project.demo.beans.PageBean;
 import project.demo.beans.UserBean;
 import project.demo.dao.BoardDao;
 
@@ -24,8 +25,12 @@ public class BoardService {
     @Value("${page.listcnt}")
     private int page_listcnt;
 
+    @Value("${page.paginationcnt}")
+    private int page_paginationcnt;
+
     @Autowired
     private BoardDao boardDao;
+
 
     //사용자 로그인정보 주입
     @Resource(name="loginUserBean")
@@ -98,5 +103,15 @@ public class BoardService {
     public void deleteContentInfo(int content_idx){
         boardDao.deleteContentInfo(content_idx);
     }
+
+    public PageBean getContentCnt(int content_board_idx, int currentPage){
+
+        int content_cnt = boardDao.getContentCnt(content_board_idx);
+
+        PageBean pageBean = new PageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt );
+
+        return pageBean;
+    }
+
 
 }

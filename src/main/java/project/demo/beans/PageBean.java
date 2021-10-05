@@ -24,10 +24,10 @@ public class PageBean {
 
     /**
      * 
-     * @param contentCnt: 전체 글 개수 
+     * @param contentCnt: 전체 글 개수  /db에서 가져옴
      * @param currentPage: 현재 글 번호
-     * @param contentPageCnt: 페이지당 글의 개수
-     * @param paginationCnt: 페이지 버튼의 개수
+     * @param contentPageCnt: 페이지당 글의 개수 / option.properties에서 가져옴
+     * @param paginationCnt: 페이지 버튼의 개수 / option.properties에서 가져옴
      */
     public PageBean(int contentCnt, int currentPage, int contentPageCnt, int paginationCnt) {
 

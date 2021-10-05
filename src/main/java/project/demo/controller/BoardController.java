@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import project.demo.beans.ContentBean;
+import project.demo.beans.PageBean;
 import project.demo.beans.UserBean;
 import project.demo.service.BoardService;
 
@@ -37,6 +38,9 @@ public class BoardController {
 		//게시글 정보 가져오기
 		List<ContentBean> contentList = boardService.getContentList(board_info_idx, page);
 		model.addAttribute("contentList", contentList);
+
+		PageBean pageBean = boardService.getContentCnt(board_info_idx, page);
+		model.addAttribute("pageBean", pageBean);
 
 		return "board/main";
 	}
